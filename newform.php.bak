@@ -1,0 +1,227 @@
+<?php    
+
+if ( array_key_exists( 'element_2_1', $_POST ) ) { 
+
+$name1 = $_POST['element_2_1'];
+$name2 = $_POST['element_2_2'];
+$email = $_POST['element_3'];
+$nick = $_POST['element_1'];
+$subscribe = $_POST['element_4_1'];
+
+//print "name: $name1 $name2 email: $email nick: $nick sub: $subscribe<br>";
+
+//DONE print visitor label
+//http://10.0.0.141/printer.php?printme=hello%20there%20%0Ais%20anybody%20out%20there%0A%20is%20anybody%20listening..
+
+printme($name1, $name2, $email,$nick,$subscribe);
+
+//TODO sub userto email list if they asked to be.   to,subject, message
+if ( $subscribe == '1') { 
+
+//mail('hackerspace_brisbane+subscribe@googlegroups.com', 'subscribe request', "subscribe\r\n");
+
+//$to      = 'hackerspace_brisbane+subscribe@googlegroups.com';
+$to      = 'davidbuzz@gmail.com';
+$subject = 'subscribe request';
+$message = 'subscribe';
+$headers = 'From: nobody@hsbne.org' . "\r\n" .
+    'Reply-To: nobody@hsbne.org' . "\r\n" .
+    'X-Mailer: PHP/' . phpversion();
+
+#mail($to, $subject, $message, $headers);
+
+}
+
+
+//TODO push user/s details to a google doc
+
+// TODO email them users detais ot teh exec, to keep them included..
+$message = " welcome centre visitor ID issued:
+Name:   $name1 $name2
+Email: $email
+Nick:  $nick
+Subscribed to google group: $subscribe
+";
+//mail('executive@hsbne.org', 'welcome centre visitor id issued', $message);
+//mail('davidbuzz@gmail.com', 'welcome centre visitor id issued', $message);
+
+
+} else { 
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>New Visitor! </title>
+<link rel="stylesheet" type="text/css" href="./colors/color1/view.css" media="all">
+<script type="text/javascript" src="js/view.js"></script>
+<script type="text/javascript" src="js/calendar.js"></script>
+<script src="js/jquery.js"></script>
+<script type="text/javascript">
+window.onload
+=
+function()
+{
+document.getElementById("element_2_1").focus();
+}
+</script>
+
+
+<script src="js/jquery.js"></script>
+<script src="js/longpoll.js"></script>
+
+   <style type="text/css" media="screen">
+      body{ background:#FFF;color:#fff;font-size:.9em; }
+      .msg{ background:#aaa;padding:.2em; border-bottom:1px #000 solid}
+      .white{ background-color:#FFFFFF;}
+      .green{ background-color:#3B9957;}
+    .red{ background-color:#992E36;}
+    </style>
+
+    <script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+        waitForMsg(); /* Start the inital request */
+    });
+    </script>
+
+</head>
+<body id="main_body" >
+
+    <div id="messages">
+        <div class="msg white">
+            messages go here
+        </div>
+    </div>
+
+
+	
+	<img id="top" src="images/top.png" alt="">
+	<div id="form_container">
+	
+		<h1><a href="/welcomecentre/index.php"><-- Start Over <--</a></h1>
+		<form id="form_567974" class="appnitro"  method="post" action="newform.php">
+					<div class="form_description">
+			<h2><font color=black>New Visitor! </h2>
+			<p>Please fill out your details to be issued a VISITOR ID label.  
+We would love to be able to keep in contact with you.</font></p>
+		</div>						
+			<ul >
+			
+					<li id="li_2" >
+		<label class="description" for="element_2">Name </label>
+		<span>
+			<input id="element_2_1" name= "element_2_1" class="element text" maxlength="255" size="8" value=""/>
+			<label>First</label>
+		</span>
+		<span>
+			<input id="element_2_2" name= "element_2_2" class="element text" maxlength="255" size="14" value=""/>
+			<label>Last</label>
+		</span> 
+		</li>		<li id="li_3" >
+		<label class="description" for="element_3">Email </label>
+		<div>
+			<input id="element_3" name="element_3" class="element text medium" type="text" maxlength="255" value=""/> 
+		</div> 
+		</li>		<li id="li_1" >
+		<label class="description" for="element_1">Nick </label>
+		<div>
+			<input id="element_1" name="element_1" class="element text medium" type="text" maxlength="255" value=""/> 
+		</div><p class="guidelines" id="guide_1"><small>Please enter your handle or nickname, if you have one.</small></p> 
+		</li>		<li id="li_4" >
+		<label class="description" for="element_4"> </label>
+		<span>
+			<input id="element_4_1" name="element_4_1" class="element checkbox" type="checkbox" value="1" />
+<label class="choice" for="element_4_1">Would you like to subscribe to our email discussion list ( a google group )  - it's free!</label>
+
+		</span> 
+		</li>
+			
+					<li class="buttons">
+			    <input type="hidden" name="form_id" value="567974" />
+			    
+				<input id="saveForm" class="button_text" type="submit" name="submit" value="Submit" />
+		</li>
+			</ul>
+		</form>	
+	</div>
+	<img id="bottom" src="images/bottom.png" alt="">
+	</body>
+</html>
+<?php 
+}
+function printme($name1,$name2,$email,$nick,$subscribe) { 
+
+$id = time(); // secs since epoch is a uniq number, since we are single threaded. this has other uses too ( as we can track first visit time this way ) - UTC time.
+//$id = str_pad($id, 15, '0',STR_PAD_LEFT); // 1D barcode must be 15 chars/digits long exctly!
+$id = str_pad($id, 05, '0',STR_PAD_LEFT); // 1D barcode must be 10 chars/digits long exctly!
+
+// future use, when the scanner supports it: 
+// 2D barcode: , note that the ! char represents the length of the barcode (30 ) + built-in checksum (3), so it's char(33)
+//$barcode = '[ESC]$[NUL][NUL][GS](k![NUL]0P0dataheredataheredatahere123456[GS](k[ETX][NUL]0Q0[NUL]';
+
+// 1D barcode:  [SI] = char(15) = length of barcode data , can change it if you want to also change padding above
+// 1D barcode:  [LF] = char(10) = length of barcode data , can change it if you want to also change padding above
+$barcode = '[GS]h9[GS]w[STX][GS]kE[LF]'.$id.'[NUL]';
+
+// some more esc/pos epson codes: 
+$boldtext = '[ESC]!(';
+$normaltext = '[ESC]![FF]';
+
+// display at top, in bigger text:
+$name = "Name:  $name1 $name2\n\n";
+
+//  assemble major bits: 
+$data = $boldtext.$name.$normaltext.
+"Visitor ID: $id
+Email: $email
+Nick: $nick
+".$barcode;
+
+// add EPSON esc/pos header and footer 
+$head = "[27]![8]"; // start of job
+$end = "\n\n\n\n\n\n[27]i\n\n[12]\n";  // end of job and cut commands 
+$body = $head.$data.$end;
+
+// convert human-readable ESC/POS pseudo-codes into actual binary ESC/POS format for printer:
+        $body  = str_replace('[2]', chr(2), $body);
+        $body  = str_replace('[8]', chr(8), $body);
+        $body  = str_replace('[12]', chr(12), $body);
+        $body  = str_replace('[13]', chr(13), $body);
+        $body  = str_replace('[27]', chr(27), $body);
+        $body  = str_replace('[29]', chr(29), $body);
+
+        $body  = str_replace('[STX]', chr(2), $body);
+        $body  = str_replace('[BS]', chr(8), $body);
+        $body  = str_replace('[FF]', chr(12), $body);
+        $body  = str_replace('[CR]', chr(13), $body);
+        $body  = str_replace('[ESC]', chr(27), $body);
+        $body  = str_replace('[GS]', chr(29), $body);
+        $body  = str_replace('[NUL]', chr(0), $body);
+        $body  = str_replace('[ETX]', chr(3), $body);
+        $body  = str_replace('[SI]', chr(15), $body);
+        $body  = str_replace('[LF]', chr(10), $body);
+$data = $body;
+
+?>
+<html>
+                                <head>
+                                <script type="text/javascript">
+                                        function load()
+                                        {
+                                                window.open('http://localhost:80/printer.php?printme=<?php
+                                                                echo base64_encode($data);
+                                                                ?>','epson_window','width=1,height=1');
+                                        document.location.href = 'http://10.0.1.253/welcomecentre/thanks.php';
+                                                return false;
+                                        }
+                                </script>
+                                </head>
+                                <body onLoad="load()">
+                                        <pre>
+                                        <?= $data; ?>
+                                        </pre>
+                                </body>
+                                </html>
+<?php
+} 
+?>

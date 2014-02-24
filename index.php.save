@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>New Visitor! </title>
+<link rel="stylesheet" type="text/css" href="/colors/color1/view.css" media="all">
+<link rel="stylesheet" href="/res/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/res/font-awesome/css/font-awesome.min.css">
+<script type="text/javascript" src="js/view.js"></script>
+<script type="text/javascript" src="js/calendar.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/longpoll.js"></script>
+
+   <style type="text/css" media="screen">
+      .msg{ background:#aaa;padding:.2em; border-bottom:1px #000 solid}
+      .white{ background-color:#FFFFFF;}
+      .green{ background-color:#3B9957;}
+    .red{ background-color:#992E36;} 
+    </style>
+
+    <script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+        waitForMsg(); /* Start the inital request */
+    });
+    </script>
+
+</head>
+<body id="main_body" >
+
+    <div id="messages">
+        <div class="msg white alert hidden alert-success">
+            Alerting stuff goes here.
+        </div>
+    </div>
+	
+<div id="form_container" class="offset3 span6">
+<ul class="btn-group-lg btn-group-vertical">
+<li class="btn btn-default btn-block disabled"><h1> <i class="fglyphicon glyphicon-fire"></i> Welcome to HSBNE! <small>Hackerspace Brisbane</small></h1> </li>
+<li class="btn btn-default btn-block active"><a class="text-muted" href="newform.php">I am a first time visitor.</a></li>
+<li class="btn btn-default btn-block active"><a class="text-muted" href=repeatvisitor.php>I'm back, baby. (Return Visitor)</a></li>
+<li class="btn btn-default btn-block active"><a class="text-muted" href=signup.php> I want to sign up as a member. </a></li>
+<li class="btn btn-default btn-block active"><a class="text-muted" href='http://trello.com/hsbneinc'> <i class="fa fa-trello"></i> HSBNE Todo List on Trello </a></li>
+</ul>
+</div>
+</body>
+</html>

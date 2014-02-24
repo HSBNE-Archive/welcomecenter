@@ -1,0 +1,14 @@
+<html>
+<body>
+<p>
+<h1>Welcome to HSBNE! </h1>
+<br>
+Click one of these links to continue: <br>
+<p>
+<h2><a href=newform.php>I AM A FIRST TIME VISITOR</a></h2><br>
+<p>
+<h2><a href=repeatvisitor.php>I AM A RETURNING VISITOR</a></h2><br>
+<p>
+<h2><a href=signup.php> I WANT TO BE A MEMBER NOW PLEASE! </a></h2><br>
+</body>
+</html>
